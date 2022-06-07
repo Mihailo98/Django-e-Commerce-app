@@ -1,0 +1,20 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+        {% for listing_item in object %}
+            <div class="card">
+                <img class="card-img-left" src="static/upload/{{ listing.al.photo }}">
+                <div class="card-body">
+                <h4 class="card-title">{{ listing_item.al.title }}</h4>
+                <p class="card-text">
+                    {{ listing_item.al.description }}
+                </p>
+                <p><small>${{ listing_item.al.price|floatformat:2 }}</small></p>
+                <p><small>Quantity: {{ listing_item.quantity }}</small></p>
+                <p><small><strong>Total:</strong> ${% widthratio listing_item.al.price 1 listing_item.quantity %}</small></p>
+                <a href="{% url 'listing' listing_item.al.id %}" class="btn btn-primary">View listing</a>
+                <a href="{% url 'remove_from_watchlist' listing_item.al.id %}" class="btn btn-danger float-right ">Remove from watchlist</a>
+                </div>
+            </div>  
+        {% endfor %}
+{% endblock %}

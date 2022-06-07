@@ -1,0 +1,27 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <hr>
+    <p><h1>Listing: {{ listing.title }}</h1></p>
+
+    <img class="card-img-left" src="static/upload/{{ listing.photo }}">
+    <p class="card-text">
+        {{ listing.description }}
+    </p>
+    <p><bold><h1>${{ listing.price|floatformat:2 }}</h1></bold></p>
+
+    <p>
+        <a href="{% url 'watchlist' listing.id %}" class="btn btn-primary">Add  to Watchlist</a>
+    </p>
+
+    <h4>Details</h4>
+
+    <ul>
+        <li>Listed by: </li>
+        <li>Category: {{ listing.category }}</li>
+    </ul>
+
+    <p>
+        <a href="{% url 'index' %}">Back home</a>
+    </p>
+{% endblock %}

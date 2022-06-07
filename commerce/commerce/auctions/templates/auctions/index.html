@@ -1,0 +1,24 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+
+    <!-- Lista listinga: title, opis, slika, cena (uredi lepo) -->
+    {% if user.is_authenticated  %}
+        {% for l in listings %}
+            <div class="card">
+                <img class="card-img-left" src="static/upload/{{ l.photo }}">
+                <div class="card-body">
+                <h4 class="card-title">{{ l.title }}</h4>
+                <p class="card-text">
+                    {{ l.description }}
+                </p>
+                <p><small>${{ l.price|floatformat:2 }}</small></p>
+                <a href="{% url 'listing' l.id %}" class="btn btn-primary">View listing</a>
+                </div>
+            </div>          
+        {% endfor %}
+    {% else %}
+        Sign in to view active listings
+    {% endif %}
+{% endblock %}
